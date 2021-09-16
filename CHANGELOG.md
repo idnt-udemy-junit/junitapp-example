@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED
+- **`#02` - JUnit5 // `#010` - TDD para debito y crédito**
+  - _The tests to test the `debit` and `credit` methods in `Account` class have been created._
+  - _The `debit` and `credit` methods have been created and implemented in `Account` class._
+  
+
 - **`#02` - JUnit5 // `#009` - Test Driven Development TDD con JUnit**
-  - A test has been created in the `AccountTest` class to explain how assertEquals works when a class has the `equals` method implemented and when it doesn't.  
+  - _A test has been created in the `AccountTest` class to explain how assertEquals works when a class has the `equals` method implemented and when it doesn't._  
   
 
 - **`#02` - JUnit5 // `#008` - Escribiendo test para el saldo**
