@@ -8,12 +8,11 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
+    private static final String ACCOUNT_NAME =  "Personal Account";
+    private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
 
     @Test
     void testAccountName() {
-        final String ACCOUNT_NAME =  "Personal Account";
-        final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
-
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
 
         final String EXPECTED = ACCOUNT_NAME;
@@ -25,13 +24,22 @@ class AccountTest {
 
     @Test
     void testAccountBalance() {
-        final String ACCOUNT_NAME =  "Personal Account";
-        final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
-
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
         final BigDecimal ACTUAL = account.getBalance();
 
         assertTrue(ACTUAL.compareTo(ACCOUNT_BALANCE) == 0);
         assertFalse(ACTUAL.compareTo(BigDecimal.ZERO) == -1);
+    }
+
+    @Test
+    void testAccountReference() {
+        Account account1 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account2 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+
+        //If the equals method has been implemented in Account class, assertNotEquals return false, else return true.
+//        assertNotEquals(account1, account2);
+
+        //If the equals method has been implemented in Account class, asserEquals return true, else return false.
+        assertEquals(account1, account2);
     }
 }
