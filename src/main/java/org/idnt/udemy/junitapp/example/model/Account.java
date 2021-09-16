@@ -1,11 +1,13 @@
 package org.idnt.udemy.junitapp.example.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class Account{
-    private String person;
+@AllArgsConstructor
+public class Account {
+    private String name;
     private BigDecimal balance;
 }
