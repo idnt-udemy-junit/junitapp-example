@@ -22,4 +22,16 @@ class AccountTest {
         assertEquals(EXPECTED, ACTUAL);
         assertTrue(ACTUAL.equals(EXPECTED));
     }
+
+    @Test
+    void testAccountBalance() {
+        final String ACCOUNT_NAME =  "Personal Account";
+        final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
+
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        final BigDecimal ACTUAL = account.getBalance();
+
+        assertTrue(ACTUAL.compareTo(ACCOUNT_BALANCE) == 0);
+        assertFalse(ACTUAL.compareTo(BigDecimal.ZERO) == -1);
+    }
 }
