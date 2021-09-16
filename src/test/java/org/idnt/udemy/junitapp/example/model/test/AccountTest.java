@@ -18,6 +18,7 @@ class AccountTest {
         final String EXPECTED = ACCOUNT_NAME;
         final String ACTUAL = account.getName();
 
+        assertNotNull(ACTUAL);
         assertEquals(EXPECTED, ACTUAL);
         assertTrue(ACTUAL.equals(EXPECTED));
     }
@@ -27,6 +28,7 @@ class AccountTest {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
         final BigDecimal ACTUAL = account.getBalance();
 
+        assertNotNull(ACTUAL);
         assertTrue(ACTUAL.compareTo(ACCOUNT_BALANCE) == 0);
         assertFalse(ACTUAL.compareTo(BigDecimal.ZERO) == -1);
     }
@@ -41,5 +43,35 @@ class AccountTest {
 
         //If the equals method has been implemented in Account class, asserEquals return true, else return false.
         assertEquals(account1, account2);
+    }
+
+    /**
+     * TDD (Test Driven Development)
+     * First develop the tests, then develop the methods.
+     */
+    @Test
+    void testAccountDebit() {
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        account.debit(new BigDecimal("1000"));
+        final BigDecimal ACTUAL = account.getBalance();
+
+        assertNotNull(ACTUAL);
+        assertEquals("4000.00", ACTUAL.toPlainString());
+        assertEquals(0, ACTUAL.compareTo(new BigDecimal("4000")));
+    }
+
+    /**
+     * TDD (Test Driven Development)
+     * First develop the tests, then develop the methods.
+     */
+    @Test
+    void testAccountCredit() {
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        account.credit(new BigDecimal("1000"));
+        final BigDecimal ACTUAL = account.getBalance();
+
+        assertNotNull(ACTUAL);
+        assertEquals("6000.00", ACTUAL.toPlainString());
+        assertEquals(0, ACTUAL.compareTo(new BigDecimal("6000")));
     }
 }
