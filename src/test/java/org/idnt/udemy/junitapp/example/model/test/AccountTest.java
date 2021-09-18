@@ -119,33 +119,39 @@ class AccountTest {
         final Bank BANK = new Bank("TROBO");
         final Account ACCOUNT_1 = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
         final Account ACCOUNT_2 = new Account("Cuenta de Patricia", ACCOUNT_BALANCE, BANK);
+        final Account ACCOUNT_3 = new Account("Cuenta de Patriciazzzx", ACCOUNT_BALANCE, null);
         BANK.addAccount(ACCOUNT_1);
         BANK.addAccount(ACCOUNT_2);
-
-        //Checks if account number 1 has the Bank class.
-        assertEquals(BANK, ACCOUNT_1.getBank());
-
-        //Checks if account number 2 has the Bank class.
-        assertEquals(BANK, ACCOUNT_2.getBank());
 
         //Checks if the accounts of "Bank" class property is null
         assertNotNull(BANK.getAccounts());
 
-        //Checks if the Bank has 2 accounts.
-        assertEquals(2, BANK.getAccounts().size());
-
-        //Checks if account number 1 is in the class "Bank".
-        assertTrue(BANK.getAccounts().stream().anyMatch(account -> account.equals(ACCOUNT_1)));
-        assertEquals(ACCOUNT_1, BANK.getAccounts().stream()
-                .filter(account -> account.equals(ACCOUNT_1))
-                .findFirst()
-                .get());
-
-        //Checks if account number 2 is in the class "Bank".
-        assertTrue(BANK.getAccounts().stream().anyMatch(account -> account.equals(ACCOUNT_2)));
-        assertEquals(ACCOUNT_2, BANK.getAccounts().stream()
-                .filter(account -> account.equals(ACCOUNT_2))
-                .findFirst()
-                .get());
+        /* Check that each block of "asserts" in each lambda function of the "assertAll" method are correct,
+         * otherwise display the first error of each block.
+         */
+        assertAll(() -> {
+            //Checks if account number 1 has the Bank class.
+            assertEquals(BANK, ACCOUNT_1.getBank());
+        }, () -> {
+            //Checks if account number 2 has the Bank class.
+            assertEquals(BANK, ACCOUNT_2.getBank());
+        }, () -> {
+            //Checks if the Bank has 2 accounts.
+            assertEquals(2, BANK.getAccounts().size());
+        }, () -> {
+            //Checks if account number 1 is in the class "Bank".
+            assertTrue(BANK.getAccounts().stream().anyMatch(account -> account.equals(ACCOUNT_2)));
+            assertEquals(ACCOUNT_2, BANK.getAccounts().stream()
+                    .filter(account -> account.equals(ACCOUNT_2))
+                    .findFirst()
+                    .get());
+        }, () -> {
+            //Checks if account number 2 is in the class "Bank".
+            assertTrue(BANK.getAccounts().stream().anyMatch(account -> account.equals(ACCOUNT_2)));
+            assertEquals(ACCOUNT_2, BANK.getAccounts().stream()
+                    .filter(account -> account.equals(ACCOUNT_2))
+                    .findFirst()
+                    .get());
+        });
     }
 }
