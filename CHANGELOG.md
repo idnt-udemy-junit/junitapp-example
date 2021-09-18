@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED
+- **`#02` - JUnit5 // `#015` - Agregando mensajes de falla en los métodos assertions**
+  - _An errors message have been added to the assert methods in `AccountTest` class, some with lambdas and some without lambdas._
+  
+
 - **`#02` - JUnit5 // `#014` - Usando el método assertAll**
   - _The use of the `assertAll` method has been added to the test `testRelationBankAccounts` of the `AccountTest` class to test it and see how it's used._
 
