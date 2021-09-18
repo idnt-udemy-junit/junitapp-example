@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED
+- **`#02` - JUnit5 // `#011` - Probando y afirmando excepciones con assertThrows en JUnit 5**
+  - A new exception has been created (`NoEnoughtMoneyException`).
+  - The `debit` method of the `Account` class has been updated to throw the `NoEnoughtMoneyException` exception when an attempt is made to subtract more money than the account balance.
+  - A new test has been added to the `AccountTest` class to test the new functionality added to the `debit` method of the `Account` class.  
+  
+
 - **`#02` - JUnit5 // `#010` - TDD para debito y crédito**
   - _The tests to test the `debit` and `credit` methods in `Account` class have been created._
   - _The `debit` and `credit` methods have been created and implemented in `Account` class._
