@@ -1,5 +1,6 @@
 package org.idnt.udemy.junitapp.example.model.test;
 
+import org.idnt.udemy.junitapp.example.exception.NotEnoughMoneyException;
 import org.idnt.udemy.junitapp.example.model.Account;
 import org.junit.jupiter.api.Test;
 
@@ -46,8 +47,8 @@ class AccountTest {
     }
 
     /**
-     * TDD (Test Driven Development)
-     * First develop the tests, then develop the methods.
+     * <p>TDD (Test Driven Development)</p>
+     * <p>First develop the tests, then develop the methods.</p>
      */
     @Test
     void testAccountDebit() {
@@ -60,9 +61,18 @@ class AccountTest {
         assertEquals(0, ACTUAL.compareTo(new BigDecimal("4000")));
     }
 
+    @Test
+    void testNotEnoughMoneyException() {
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+
+        Exception exception = assertThrows(NotEnoughMoneyException.class, ()->{account.debit(new BigDecimal("6000"));});
+        final String ACTUAL = exception.getMessage();
+        assertEquals("No Enought Money !", ACTUAL);
+    }
+
     /**
-     * TDD (Test Driven Development)
-     * First develop the tests, then develop the methods.
+     * <p>TDD (Test Driven Development)</p>
+     * <p>First develop the tests, then develop the methods.</p>
      */
     @Test
     void testAccountCredit() {
