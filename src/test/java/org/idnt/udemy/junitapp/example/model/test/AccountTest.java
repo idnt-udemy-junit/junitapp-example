@@ -21,6 +21,8 @@ class AccountTest {
         final String ACTUAL = account.getName();
 
         assertNotNull(ACTUAL);
+
+        //Checks if the account name corresponds to the name that has been established
         assertEquals(EXPECTED, ACTUAL);
         assertTrue(ACTUAL.equals(EXPECTED));
     }
@@ -31,6 +33,8 @@ class AccountTest {
         final BigDecimal ACTUAL = account.getBalance();
 
         assertNotNull(ACTUAL);
+
+        //Checks if the account balance corresponds to the balance that has been established
         assertTrue(ACTUAL.compareTo(ACCOUNT_BALANCE) == 0);
         assertFalse(ACTUAL.compareTo(BigDecimal.ZERO) == -1);
     }
@@ -58,6 +62,8 @@ class AccountTest {
         final BigDecimal ACTUAL = account.getBalance();
 
         assertNotNull(ACTUAL);
+
+        //Checks if 1000 has been subtracted from the balance of the account.
         assertEquals("4000.00", ACTUAL.toPlainString());
         assertEquals(0, ACTUAL.compareTo(new BigDecimal("4000")));
     }
@@ -66,7 +72,10 @@ class AccountTest {
     void testNotEnoughMoneyException() {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
 
+        //Checks if the "NoEnoughMoneyException" exception was thrown when subtracting an amount greater than the account balance.
         Exception exception = assertThrows(NotEnoughMoneyException.class, ()->{account.debit(new BigDecimal("6000"));});
+
+        //Checks if the message of the "NoEnoughMoneyException" exception is equal to "No Enought Money !".
         final String ACTUAL = exception.getMessage();
         assertEquals("No Enought Money !", ACTUAL);
     }
@@ -82,6 +91,8 @@ class AccountTest {
         final BigDecimal ACTUAL = account.getBalance();
 
         assertNotNull(ACTUAL);
+
+        //Checks if 1000 has been added to the balance of the account.
         assertEquals("6000.00", ACTUAL.toPlainString());
         assertEquals(0, ACTUAL.compareTo(new BigDecimal("6000")));
     }
@@ -89,15 +100,52 @@ class AccountTest {
     @Test
     void testTransferMoneyAccounts() {
         final Bank BANK = new Bank("TROBO");
-        final Account SOURCE = new Account("´Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
+        final Account SOURCE = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
         final Account TARGET = new Account("Cuenta de Patricia", ACCOUNT_BALANCE, BANK);
         BANK.addAccount(SOURCE);
         BANK.addAccount(TARGET);
 
         BANK.transfer(SOURCE, TARGET, new BigDecimal("1000"));
 
+        //Checks if 1000 has been subtracted from the balance of the source account.
         assertEquals(0, SOURCE.getBalance().compareTo(new BigDecimal("4000")));
+
+        //Checks if 1000 has been added to the balance of the target account.
         assertEquals(0, TARGET.getBalance().compareTo(new BigDecimal("6000")));
+    }
+
+    @Test
+    void testRelationBankAccounts() {
+        final Bank BANK = new Bank("TROBO");
+        final Account ACCOUNT_1 = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
+        final Account ACCOUNT_2 = new Account("Cuenta de Patricia", ACCOUNT_BALANCE, BANK);
+        BANK.addAccount(ACCOUNT_1);
+        BANK.addAccount(ACCOUNT_2);
+
+        //Checks if account number 1 has the Bank class.
+        assertEquals(BANK, ACCOUNT_1.getBank());
+
+        //Checks if account number 2 has the Bank class.
+        assertEquals(BANK, ACCOUNT_2.getBank());
+
+        //Checks if the accounts of "Bank" class property is null
+        assertNotNull(BANK.getAccounts());
+
+        //Checks if the Bank has 2 accounts.
         assertEquals(2, BANK.getAccounts().size());
+
+        //Checks if account number 1 is in the class "Bank".
+        assertTrue(BANK.getAccounts().stream().anyMatch(account -> account.equals(ACCOUNT_1)));
+        assertEquals(ACCOUNT_1, BANK.getAccounts().stream()
+                .filter(account -> account.equals(ACCOUNT_1))
+                .findFirst()
+                .get());
+
+        //Checks if account number 2 is in the class "Bank".
+        assertTrue(BANK.getAccounts().stream().anyMatch(account -> account.equals(ACCOUNT_2)));
+        assertEquals(ACCOUNT_2, BANK.getAccounts().stream()
+                .filter(account -> account.equals(ACCOUNT_2))
+                .findFirst()
+                .get());
     }
 }
