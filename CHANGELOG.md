@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED
+- **`#02` - JUnit5 // `#014` - Usando el método assertAll**
+  - _The use of the `assertAll` method has been added to the test `testRelationBankAccounts` of the `AccountTest` class to test it and see how it's used._
+
+
 - **`#02` - JUnit5 // `#013` - Probando y afirmando las relaciones entre Banco y Cuenta**
   - _The `Bank` class has been edited to avoid throwing the `StackOverflowError` exception due to cyclic dependencies._
   - _A test has been added to check the relationships between the `Bank` class and the `Account` class, and between the `Account` class and the `Bank` class._  
