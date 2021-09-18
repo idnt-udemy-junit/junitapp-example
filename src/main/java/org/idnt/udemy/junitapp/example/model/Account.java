@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public class Account {
     private String name;
     private BigDecimal balance;
+    private Bank bank;
     private static final String ERROR_MSG_NOT_ENOUGHT_MONEY = "No Enought Money !";
 
     /**
@@ -38,4 +39,6 @@ public class Account {
         //The value returned by the operation must be assigned, since the modifications made by BigDecimal are not by reference.
         this.setBalance(this.balance.add(quantity));
     }
+
+
 }
