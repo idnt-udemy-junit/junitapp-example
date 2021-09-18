@@ -2,6 +2,7 @@ package org.idnt.udemy.junitapp.example.model.test;
 
 import org.idnt.udemy.junitapp.example.exception.NotEnoughMoneyException;
 import org.idnt.udemy.junitapp.example.model.Account;
+import org.idnt.udemy.junitapp.example.model.Bank;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ class AccountTest {
 
     @Test
     void testAccountName() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
 
         final String EXPECTED = ACCOUNT_NAME;
         final String ACTUAL = account.getName();
@@ -26,7 +27,7 @@ class AccountTest {
 
     @Test
     void testAccountBalance() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         final BigDecimal ACTUAL = account.getBalance();
 
         assertNotNull(ACTUAL);
@@ -36,8 +37,8 @@ class AccountTest {
 
     @Test
     void testAccountReference() {
-        Account account1 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
-        Account account2 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account1 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
+        Account account2 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
 
         //If the equals method has been implemented in Account class, assertNotEquals return false, else return true.
 //        assertNotEquals(account1, account2);
@@ -52,7 +53,7 @@ class AccountTest {
      */
     @Test
     void testAccountDebit() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         account.debit(new BigDecimal("1000"));
         final BigDecimal ACTUAL = account.getBalance();
 
@@ -63,7 +64,7 @@ class AccountTest {
 
     @Test
     void testNotEnoughMoneyException() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
 
         Exception exception = assertThrows(NotEnoughMoneyException.class, ()->{account.debit(new BigDecimal("6000"));});
         final String ACTUAL = exception.getMessage();
@@ -76,12 +77,27 @@ class AccountTest {
      */
     @Test
     void testAccountCredit() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE);
+        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         account.credit(new BigDecimal("1000"));
         final BigDecimal ACTUAL = account.getBalance();
 
         assertNotNull(ACTUAL);
         assertEquals("6000.00", ACTUAL.toPlainString());
         assertEquals(0, ACTUAL.compareTo(new BigDecimal("6000")));
+    }
+
+    @Test
+    void testTransferMoneyAccounts() {
+        final Bank BANK = new Bank("TROBO");
+        final Account SOURCE = new Account("´Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
+        final Account TARGET = new Account("Cuenta de Patricia", ACCOUNT_BALANCE, BANK);
+        BANK.addAccount(SOURCE);
+        BANK.addAccount(TARGET);
+
+        BANK.transfer(SOURCE, TARGET, new BigDecimal("1000"));
+
+        assertEquals(0, SOURCE.getBalance().compareTo(new BigDecimal("4000")));
+        assertEquals(0, TARGET.getBalance().compareTo(new BigDecimal("6000")));
+        assertEquals(2, BANK.getAccounts().size());
     }
 }

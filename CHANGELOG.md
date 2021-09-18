@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED
+- **`#02` - JUnit5 // `#012` - Añadiendo la clase Banco y la relación con las cuentas**
+  - The `Bank` class has been added.
+  - The relationship of the `Bank` class with the `Account` class and the `Account` class with the `Bank` class has been established.
+  - The method for transferring money between 2 accounts has been created.
+  - The test has been created to test the method created in the class `Bank` in the class `AccountTest`.  
+  
+
 - **`#02` - JUnit5 // `#011` - Probando y afirmando excepciones con assertThrows en JUnit 5**
   - A new exception has been created (`NoEnoughtMoneyException`).
   - The `debit` method of the `Account` class has been updated to throw the `NoEnoughtMoneyException` exception when an attempt is made to subtract more money than the account balance.
