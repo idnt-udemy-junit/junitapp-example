@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
-### ADDED
+### ADDED  
+- **`#02` - JUnit5 // `#018` - Ciclo de vida anotaciones @AfterAll y @BeforeAll**
+  - The methods to be executed before and after all tests in the `AccountTest` class have been created.
+  - The `002-glosario` file has been updated.
+  
+
 - **`#02` - JUnit5 // `#017` - Ciclo de vida anotaciones @AfterEach y @BeforeEach**
   - The methods to be executed before and after each test have been established in the `AccountTest` class.  
   - The `002-glosario` file has been updated.

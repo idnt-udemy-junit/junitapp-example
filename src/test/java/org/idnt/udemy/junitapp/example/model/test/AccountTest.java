@@ -7,16 +7,29 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class AccountTest {
     private static final String ACCOUNT_NAME =  "Personal Account";
     private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
     private Account account;
 
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("BEFORE ALL");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("AFTER ALL");
+    }
 
     @BeforeEach
     void beforeTest(){
