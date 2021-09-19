@@ -3,6 +3,8 @@ package org.idnt.udemy.junitapp.example.model.test;
 import org.idnt.udemy.junitapp.example.exception.NotEnoughMoneyException;
 import org.idnt.udemy.junitapp.example.model.Account;
 import org.idnt.udemy.junitapp.example.model.Bank;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ class AccountTest {
     private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
 
     @Test
+    @DisplayName("Testing the current account name")
     void testAccountName() {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
 
@@ -34,6 +37,7 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Testing the current account balance")
     void testAccountBalance() {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         final BigDecimal ACTUAL = account.getBalance();
@@ -53,6 +57,7 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Testing the current account reference")
     void testAccountReference() {
         Account account1 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         Account account2 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
@@ -73,6 +78,7 @@ class AccountTest {
      * <p>First develop the tests, then develop the methods.</p>
      */
     @Test
+    @DisplayName("Testing the current account debit operation")
     void testAccountDebit() {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         account.debit(new BigDecimal("1000"));
@@ -88,6 +94,7 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Testing that it isn't possible to withdraw more money than is available in the current account")
     void testNotEnoughMoneyException() {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         final String EXPECTED_MSG = "No Enought Money !";
@@ -110,6 +117,7 @@ class AccountTest {
      * <p>First develop the tests, then develop the methods.</p>
      */
     @Test
+    @DisplayName("Testing the current account credit operation")
     void testAccountCredit() {
         Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         account.credit(new BigDecimal("1000"));
@@ -125,6 +133,7 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Testing the money transfer operation between 2 accounts")
     void testTransferMoneyAccounts() {
         final Bank BANK = new Bank("TROBO");
         final Account SOURCE = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
@@ -144,6 +153,7 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Testing the relationship between the bank and the accounts")
     void testRelationBankAccounts() {
         final Bank BANK = new Bank("TROBO");
         final Account ACCOUNT_1 = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
