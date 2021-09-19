@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED
+- **Notes have been created with everything that has been covered in the course**  
+  
+
 - **`#02` - JUnit5 // `#016` - Usando anotaciones @DisplayName y @Disabled**
 Tests of the `AccountTest` class have been given more specific names using the `@DisplayName` annotation.
+  
 
 - **`#02` - JUnit5 // `#015` - Agregando mensajes de falla en los métodos assertions**
   - _An errors message have been added to the assert methods in `AccountTest` class, some with lambdas and some without lambdas._
