@@ -3,9 +3,10 @@ package org.idnt.udemy.junitapp.example.model.test;
 import org.idnt.udemy.junitapp.example.exception.NotEnoughMoneyException;
 import org.idnt.udemy.junitapp.example.model.Account;
 import org.idnt.udemy.junitapp.example.model.Bank;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 
 import java.math.BigDecimal;
 
@@ -14,14 +15,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class AccountTest {
     private static final String ACCOUNT_NAME =  "Personal Account";
     private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
+    private Account account;
+
+
+    @BeforeEach
+    void beforeTest(){
+        System.out.println("BEFORE TEST");
+        this.account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
+    }
+
+    @AfterEach
+    void afterTest(){
+        System.out.println("AFTER TEST");
+    }
 
     @Test
     @DisplayName("Testing the current account name")
     void testAccountName() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
-
         final String EXPECTED = ACCOUNT_NAME;
-        final String ACTUAL = account.getName();
+        final String ACTUAL = this.account.getName();
 
         /**
          * ERROR MESSAGES WITHOUT LAMBDAS
@@ -39,8 +51,7 @@ class AccountTest {
     @Test
     @DisplayName("Testing the current account balance")
     void testAccountBalance() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
-        final BigDecimal ACTUAL = account.getBalance();
+        final BigDecimal ACTUAL = this.account.getBalance();
 
         /**
          * ERROR MESSAGES WHIT LAMBDAS
@@ -80,9 +91,8 @@ class AccountTest {
     @Test
     @DisplayName("Testing the current account debit operation")
     void testAccountDebit() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
-        account.debit(new BigDecimal("1000"));
-        final BigDecimal ACTUAL = account.getBalance();
+        this.account.debit(new BigDecimal("1000"));
+        final BigDecimal ACTUAL = this.account.getBalance();
 
         assertNotNull(ACTUAL, () -> "The account balance cant' be void");
 
@@ -96,13 +106,12 @@ class AccountTest {
     @Test
     @DisplayName("Testing that it isn't possible to withdraw more money than is available in the current account")
     void testNotEnoughMoneyException() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         final String EXPECTED_MSG = "No Enought Money !";
         final BigDecimal MONEY_TO_BE_SUBSTRACT = new BigDecimal("6000");
 
         //Checks if the "NoEnoughMoneyException" exception was thrown when subtracting an amount greater than the account balance.
         Exception exception = assertThrows(NotEnoughMoneyException.class,
-                () -> account.debit(MONEY_TO_BE_SUBSTRACT),
+                () -> this.account.debit(MONEY_TO_BE_SUBSTRACT),
                 () -> String.format("The balance can't be negative. Subtracted %s from %s", MONEY_TO_BE_SUBSTRACT, ACCOUNT_BALANCE));
 
         //Checks if the message of the "NoEnoughMoneyException" exception is equal to "No Enought Money !".
@@ -119,9 +128,8 @@ class AccountTest {
     @Test
     @DisplayName("Testing the current account credit operation")
     void testAccountCredit() {
-        Account account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         account.credit(new BigDecimal("1000"));
-        final BigDecimal ACTUAL = account.getBalance();
+        final BigDecimal ACTUAL = this.account.getBalance();
 
         assertNotNull(ACTUAL, () -> "The account balance cant' be void");
 
@@ -158,7 +166,6 @@ class AccountTest {
         final Bank BANK = new Bank("TROBO");
         final Account ACCOUNT_1 = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
         final Account ACCOUNT_2 = new Account("Cuenta de Patricia", ACCOUNT_BALANCE, BANK);
-        final Account ACCOUNT_3 = new Account("Cuenta de Patriciazzzx", ACCOUNT_BALANCE, null);
         BANK.addAccount(ACCOUNT_1);
         BANK.addAccount(ACCOUNT_2);
 
