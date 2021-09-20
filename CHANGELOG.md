@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#022` - Clase de test anidadas usando @Nested**
+  - The test classes of the `AccountTest` class have been grouped using the annotation `@Nested`.  
+  
+
 - **`#02` - JUnit5 // `#021` - Ejecución de test condicional con Assumptions programáticamente`**
   - A new test has been added to which some `Assumptions` have been added for testing.  
 

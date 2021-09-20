@@ -238,3 +238,10 @@ Comprueba que una expresión sea verdarea, y si lo es todos los asserts que cont
 
 **Packaje:**  
 `org.junit.jupiter.api.Assumptions.assumingThat`
+
+## `@Nested`
+Esta anotación permite marcar una clase anidada con varios tests dentro, de esta manera JUnit agrupará las pruebas por cada clase anidada. A esta clase anidada se le puede añadir la anotación `@DisplayName`.  
+Solo sirve para organizar las salidas.  
+
+**Packaje:**  
+`org.junit.jupiter.api.Nested`
