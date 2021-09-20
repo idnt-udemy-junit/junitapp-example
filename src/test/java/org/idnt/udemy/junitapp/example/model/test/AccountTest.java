@@ -9,8 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.condition.*;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -210,5 +212,106 @@ class AccountTest {
             assertEquals(ACCOUNT_2, BANK.getAccounts().stream().filter(account -> account.equals(ACCOUNT_2)).findFirst().get(),
                     () -> String.format("Account 2 was expected in the bank's list of accounts: EXPECTED => %s", ACCOUNT_2));
         });
+    }
+
+    @Test
+    @EnabledOnOs(OS.WINDOWS)
+    @DisplayName("Test enabled for Windows")
+    void testEnableWindows() {
+
+    }
+
+    @Test
+    @EnabledOnOs({OS.LINUX, OS.MAC})
+    @DisplayName("Test enabled for Linux and MAC")
+    void testEnableLinuxAndMAC() {
+
+    }
+
+    @Test
+    @DisabledOnOs(OS.WINDOWS)
+    @DisplayName("Test disabled for Windows")
+    void testDisableWindows() {
+
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_8)
+    @DisplayName("Test enabled for Java 8")
+    void testEnableJava8() {
+
+    }
+
+    @Test
+    @DisabledOnJre({JRE.JAVA_8, JRE.JAVA_16})
+    @DisplayName("Test disabled for Java 8 and 16")
+    void testDisableJava8And16() {
+
+    }
+
+    @Test
+    @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_16)
+    @DisplayName("Test enabled for Java between 8 and 16")
+    void testEnableFromJava8ToJava16() {
+
+    }
+
+    @Test
+    @DisabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_16)
+    @DisplayName("Test disabled for Java between 8 and 16")
+    void testDisableFromJava8ToJava16() {
+
+    }
+
+    @Test
+    @DisabledOnJre(JRE.JAVA_15)
+    @DisplayName("Test disabled for Java 15")
+    void testEnableJava15() {
+
+    }
+
+    @Test
+    @DisplayName("Test to print the System Properties")
+    void printSystemProperties() {
+        Properties properties = System.getProperties();
+        properties.forEach((key, value) -> System.out.println(String.format("%s => %s", key, value)));
+    }
+
+    @Test
+    @EnabledIfSystemProperty(named="java.version", matches = "16.0.2")
+    @DisplayName("Test enabled for Java 16.0.2 (System Properties)")
+    void testEnableSystemPropertiesJavaVersion() {
+    }
+
+    @Test
+    @EnabledIfSystemProperty(named="ENV", matches = "dev")
+    @DisplayName("Test enabled for enviroment \"dev\" (System Properties)")
+    void testEnableSystemPropertiesENVdev() {
+    }
+
+    @Test
+    @DisabledIfSystemProperty(named="java.version", matches = "16.*")
+    @DisplayName("Test disabled for Java 16.* (System Properties)")
+    void testDisableSystemPropertiesJavaVersion() {
+    }
+
+    @Test
+    @EnabledIfSystemProperties({
+            @EnabledIfSystemProperty(named="java.version", matches = "16.*"),
+            @EnabledIfSystemProperty(named="java.vm.vendor", matches = "Oracle Corporation"),
+            @EnabledIfSystemProperty(named="sun.arch.data.model", matches = "64")
+    })
+    @DisplayName("Test disabled for some System Properties")
+    void testEnableForSystemProperties() {
+    }
+
+    @Test
+    @DisabledIfSystemProperties({
+            @DisabledIfSystemProperty(named="java.version", matches = "16.*"),
+            @DisabledIfSystemProperty(named="java.vm.vendor", matches = "Oracle Corporation"),
+            @DisabledIfSystemProperty(named="sun.arch.data.model", matches = "64")
+    })
+    @DisplayName("Test disabled for some System Properties")
+    void testDisableForSystemProperties() {
     }
 }
