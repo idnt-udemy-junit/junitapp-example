@@ -9,7 +9,10 @@ Permite marcar el método que servirá como Test de JUnit.
 ## `Assertions`
 Disponemos de los mismos Assert de JUnit 4, con algunas peculiaridades, como que ahora tanto la expresión como el mensaje del Assert, se pueden indicar mediante una lambda de Java 8.  
 
-Ahora el mensaje opcional de la aserción es el último parámetro, y al usar una lambda para indicar el mensaje, esta se evalúa cuando se va a mostrar (no cuando se ejecuta el assert), de esta manera se evita el tiempo de construir mensajes complejos innecesariamente.
+Ahora el mensaje opcional de la aserción es el último parámetro, y al usar una lambda para indicar el mensaje, esta se evalúa cuando se va a mostrar (no cuando se ejecuta el assert), de esta manera se evita el tiempo de construir mensajes complejos innecesariamente.  
+
+**Packaje:**  
+`org.junit.jupiter.api.Assertions.*`
 
 **Packaje:**  
 `org.junit.jupiter.api.Assertions`
@@ -210,3 +213,28 @@ Esta anotación nos permite deshabilitar tests según una o unas determinadas va
 `org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable`  
 `org.junit.jupiter.api.condition.DisabledIfEnvironmentVariables` 
 
+## `Assumptions`
+Son métodos estáticos para admitir la ejecución de un test condicional basado en suposiciones. Una suposición fallida dará como resultado la anulación de un test. Los supuestos se utilizan normalmente cuando no tiene sentido continuar con la ejecución de un método de prueba determinado.  
+
+**Packaje:**  
+`org.junit.jupiter.api.Assumptions.*`  
+
+## `Assumptions.assumeTrue()`
+Comprueba que una expresión sea verdadera, y si lo es deshabilita el test.
+
+**Packaje:**  
+`org.junit.jupiter.api.Assumptions.assumeTrue`
+
+## `Assumptions.assumeFalse()`
+Comprueba que una expresión sea falsa, y si lo es deshabilita el test.
+
+**Packaje:**  
+`org.junit.jupiter.api.Assumptions.assumeFalse`
+
+## `Assumptions.assumingThat()`
+Comprueba que una expresión sea verdarea, y si lo es todos los asserts que contenga los ejecuta, de lo contrario no. Ej.:  
+
+`assumingThat(IS_DEV, () -> assertEquals(0, ACTUAL));`
+
+**Packaje:**  
+`org.junit.jupiter.api.Assumptions.assumingThat`
