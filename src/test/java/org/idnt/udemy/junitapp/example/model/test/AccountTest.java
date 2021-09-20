@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.condition.*;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -313,5 +314,44 @@ class AccountTest {
     })
     @DisplayName("Test disabled for some System Properties")
     void testDisableForSystemProperties() {
+    }
+
+    @Test
+    @DisplayName("Test to print the enviroment variables")
+    void printEnviromentVariables() {
+        Map<String, String> enviromentVariables = System.getenv();
+        enviromentVariables.forEach((key, value) -> System.out.println(String.format("%s => %s", key, value)));
+    }
+
+    @Test
+    @EnabledIfEnvironmentVariable(named="NUMBER_OF_PROCESSORS", matches = "8")
+    @DisplayName("Test enabled for enviroment variables \"NUMBER_OF_PROCESSORS\" with value \"8\" (Enviroment Variables)")
+    void testEnableEnvironmentVariableNumberProcessors8() {
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariable(named="NUMBER_OF_PROCESSORS", matches = "8")
+    @DisplayName("Test disabled for enviroment variables \"NUMBER_OF_PROCESSORS\" with value \"8\" (Enviroment Variables)")
+    void testdisableEnvironmentVariableNumberProcessors8() {
+    }
+
+    @Test
+    @EnabledIfEnvironmentVariables({
+            @EnabledIfEnvironmentVariable(named="NUMBER_OF_PROCESSORS", matches = "8"),
+            @EnabledIfEnvironmentVariable(named="PROCESSOR_ARCHITECTURE", matches = "AMD64")
+
+    })
+    @DisplayName("Test enabled for some enviroment variables (Enviroment Variables)")
+    void testEnableForEnvironmentVariables() {
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariables({
+            @DisabledIfEnvironmentVariable(named="NUMBER_OF_PROCESSORS", matches = "8"),
+            @DisabledIfEnvironmentVariable(named="PROCESSOR_ARCHITECTURE", matches = "AMD64")
+
+    })
+    @DisplayName("Test disabled for some enviroment variables (Enviroment Variables)")
+    void testDisableForEnvironmentVariables() {
     }
 }
