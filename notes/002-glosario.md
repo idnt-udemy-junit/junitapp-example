@@ -245,3 +245,24 @@ Solo sirve para organizar las salidas.
 
 **Packaje:**  
 `org.junit.jupiter.api.Nested`
+
+## `@RepeatedTest`
+Esta anotación permite marcar una test para que ejecute un test x número de veces. Se le puede cambiar el nombre a la repetición, y también se pueden obtener para establecer en el nombre los siguientes atributos:
+- `{displayName}` => String que contiene la anotación `@DisplayName`
+- `{currentRepetition}` => El número de la repetición actual.
+- `{totalRepetitions}` => El número de las repeticiones totales.
+
+También se puede obtener por inyección de dependencias a través de la firma del método del test el objeto `RepetitionInfo`, el cual contiene la información respecto a la repetición del test. Ej.:  
+
+`@RepeatedTest(12)`  
+`@RepeatedTest(value=12, name="{displayName} => Test [{currentRepetition}] // Total [{totalRepetitions}]")`
+```
+void testRepeated(RepetitionInfo info) {
+    if( info.getCurrentRepetition() == 5){
+        System.out.println("Repetition: " + info.getCurrentRepetition());
+    }
+}
+```
+
+**Packaje:**  
+`org.junit.jupiter.api.RepeatedTest`
