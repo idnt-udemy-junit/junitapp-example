@@ -11,4 +11,3 @@ JUnit es un framework para escribit pruebas unitarias de nuestro código y ejecu
   
 > **JUnit Vintage**  
 > Es el componente encargado de los tests de Junit 3 y 4, por si alguien los echa de menos.
-> Es el componente encargado de los tests de Junit 3 y 4, por si alguien los echa de menos.
