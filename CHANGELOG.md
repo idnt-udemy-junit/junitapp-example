@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#021` - Ejecución de test condicional con Assumptions programáticamente`**
+  - A new test has been added to which some `Assumptions` have been added for testing.  
+
+
 - **`#02` - JUnit5 // `#020` - Ejecuciones de test condicionales con @EnabledEnvironmentVariable**  
   - Several conditional tests have been created with the following annotations: `@EnabledIfEnvironmentVariable `, `@EnabledIfEnvironmentVariables`, `@DisabledIfEnvironmentVariable ` and `@DisabledIfEnvironmentVariables`.
   - The `002-glosario` file has been updated.  
