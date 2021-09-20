@@ -7,39 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#023` - Repitiendo pruebas con @RepeatedTest**
+  - _A test marked with the annotation `@RepeatedTest` has been added in `AccountTest` class._  
+  - _The `002-glosario` file has been updated._
+  
+
 - **`#02` - JUnit5 // `#022` - Clase de test anidadas usando @Nested**
-  - The test classes of the `AccountTest` class have been grouped using the annotation `@Nested`.  
+  - _The test classes of the `AccountTest` class have been grouped using the annotation `@Nested`._ 
+  - _The `002-glosario` file has been updated._
   
 
 - **`#02` - JUnit5 // `#021` - Ejecución de test condicional con Assumptions programáticamente`**
-  - A new test has been added to which some `Assumptions` have been added for testing.  
+  - _A new test has been added to which some `Assumptions` have been added for testing._  
+  - _The `002-glosario` file has been updated._
 
 
 - **`#02` - JUnit5 // `#020` - Ejecuciones de test condicionales con @EnabledEnvironmentVariable**  
-  - Several conditional tests have been created with the following annotations: `@EnabledIfEnvironmentVariable `, `@EnabledIfEnvironmentVariables`, `@DisabledIfEnvironmentVariable ` and `@DisabledIfEnvironmentVariables`.
-  - The `002-glosario` file has been updated.  
+  - _Several conditional tests have been created with the following annotations: `@EnabledIfEnvironmentVariable `, `@EnabledIfEnvironmentVariables`, `@DisabledIfEnvironmentVariable ` and `@DisabledIfEnvironmentVariables`._
+  - _The `002-glosario` file has been updated._  
   
 
 - **`#02` - JUnit5 // `#019` - Test condicionales @EnabledOnOs, @EnabledOnJre, @EnabledIfSystemProperty etc**  
-  - Several conditional tests have been created with the following annotations: `@EnabledOnOs`, `@DisabledOnOs`, `@EnabledOnJre`, `@DisabledOnJre`, `@EnabledForJreRange`, `@DisabledForJreRange`, `@EnabledIfSystemProperty`, `@DisabledIfSystemProperty`, `@EnabledIfSystemProperties` and `@DisabledIfSystemProperties`.  
-  - The `002-glosario` file has been updated.  
+  - _Several conditional tests have been created with the following annotations: `@EnabledOnOs`, `@DisabledOnOs`, `@EnabledOnJre`, `@DisabledOnJre`, `@EnabledForJreRange`, `@DisabledForJreRange`, `@EnabledIfSystemProperty`, `@DisabledIfSystemProperty`, `@EnabledIfSystemProperties` and `@DisabledIfSystemProperties`._  
+  - _The `002-glosario` file has been updated._  
   
 
 - **`#02` - JUnit5 // `#018` - Ciclo de vida anotaciones @AfterAll y @BeforeAll**
-  - The methods to be executed before and after all tests in the `AccountTest` class have been created.
-  - The `002-glosario` file has been updated.
+  - _The methods to be executed before and after all tests in the `AccountTest` class have been created._
+  - _The `002-glosario` file has been updated._
   
 
 - **`#02` - JUnit5 // `#017` - Ciclo de vida anotaciones @AfterEach y @BeforeEach**
-  - The methods to be executed before and after each test have been established in the `AccountTest` class.  
-  - The `002-glosario` file has been updated.
+  - _The methods to be executed before and after each test have been established in the `AccountTest` class._  
+  - _The `002-glosario` file has been updated._
   
 
 - **Notes have been created with everything that has been covered in the course**  
   
 
 - **`#02` - JUnit5 // `#016` - Usando anotaciones @DisplayName y @Disabled**
-Tests of the `AccountTest` class have been given more specific names using the `@DisplayName` annotation.
+  - _Tests of the `AccountTest` class have been given more specific names using the `@DisplayName` annotation._
   
 
 - **`#02` - JUnit5 // `#015` - Agregando mensajes de falla en los métodos assertions**

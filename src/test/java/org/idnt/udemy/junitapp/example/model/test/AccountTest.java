@@ -9,6 +9,7 @@ import org.junit.jupiter.api.condition.*;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
@@ -17,6 +18,21 @@ import static org.junit.jupiter.api.Assumptions.*;
 class AccountTest {
     private static final String ACCOUNT_NAME =  "Personal Account";
     private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
+
+//    @RepeatedTest(12)
+    @RepeatedTest(value=12, name="{displayName} => Test [{currentRepetition}] // Total [{totalRepetitions}]")
+    @DisplayName("Repeated Test")
+    void testRepeated(RepetitionInfo info) {
+        if( info.getCurrentRepetition() == 5){
+            System.out.println(String.format("This is repetition %s", info.getCurrentRepetition()));
+        }
+
+        final int ACTUAL = new Random().nextInt(13);
+
+        assertNotNull(ACTUAL, () -> "The result cant' be void");
+        assertTrue(ACTUAL >= 0 && ACTUAL <= 10,
+                () -> String.format("The random number must be between 0 and 10: NUMBER => %s", ACTUAL));
+    }
 
     @Nested
     @DisplayName("Testing the basic attributes and methods of \"Account\" class")
