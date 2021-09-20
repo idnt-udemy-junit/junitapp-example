@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#019` - Test condicionales @EnabledOnOs, @EnabledOnJre, @EnabledIfSystemProperty etc**  
+  - Several conditional tests have been created with the following annotations: `@EnabledOnOs`, `@DisabledOnOs`, `@EnabledOnJre`, `@DisabledOnJre`, `@EnabledForJreRange`, `@DisabledForJreRange`, `@EnabledIfSystemProperty`, `@DisabledIfSystemProperty`, `@EnabledIfSystemProperties` and `@DisabledIfSystemProperties`.  
+  - The `002-glosario` file has been updated.  
+  
+
 - **`#02` - JUnit5 // `#018` - Ciclo de vida anotaciones @AfterAll y @BeforeAll**
   - The methods to be executed before and after all tests in the `AccountTest` class have been created.
   - The `002-glosario` file has been updated.
