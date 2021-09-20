@@ -339,7 +339,6 @@ class AccountTest {
     @EnabledIfEnvironmentVariables({
             @EnabledIfEnvironmentVariable(named="NUMBER_OF_PROCESSORS", matches = "8"),
             @EnabledIfEnvironmentVariable(named="PROCESSOR_ARCHITECTURE", matches = "AMD64")
-
     })
     @DisplayName("Test enabled for some enviroment variables (Enviroment Variables)")
     void testEnableForEnvironmentVariables() {
@@ -349,7 +348,6 @@ class AccountTest {
     @DisabledIfEnvironmentVariables({
             @DisabledIfEnvironmentVariable(named="NUMBER_OF_PROCESSORS", matches = "8"),
             @DisabledIfEnvironmentVariable(named="PROCESSOR_ARCHITECTURE", matches = "AMD64")
-
     })
     @DisplayName("Test disabled for some enviroment variables (Enviroment Variables)")
     void testDisableForEnvironmentVariables() {
