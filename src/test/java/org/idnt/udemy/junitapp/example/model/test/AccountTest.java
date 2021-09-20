@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 //@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class AccountTest {
@@ -46,7 +47,7 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("Testing the current account name")
+    @DisplayName("Test the current account name")
     void testAccountName() {
         final String EXPECTED = ACCOUNT_NAME;
         final String ACTUAL = this.account.getName();
@@ -65,7 +66,7 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("Testing the current account balance")
+    @DisplayName("Test the current account balance")
     void testAccountBalance() {
         final BigDecimal ACTUAL = this.account.getBalance();
 
@@ -84,7 +85,7 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("Testing the current account reference")
+    @DisplayName("Test the current account reference")
     void testAccountReference() {
         Account account1 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         Account account2 = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
@@ -105,7 +106,7 @@ class AccountTest {
      * <p>First develop the tests, then develop the methods.</p>
      */
     @Test
-    @DisplayName("Testing the current account debit operation")
+    @DisplayName("Test the current account debit operation")
     void testAccountDebit() {
         this.account.debit(new BigDecimal("1000"));
         final BigDecimal ACTUAL = this.account.getBalance();
@@ -120,7 +121,7 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("Testing that it isn't possible to withdraw more money than is available in the current account")
+    @DisplayName("Test that it isn't possible to withdraw more money than is available in the current account")
     void testNotEnoughMoneyException() {
         final String EXPECTED_MSG = "No Enought Money !";
         final BigDecimal MONEY_TO_BE_SUBSTRACT = new BigDecimal("6000");
@@ -142,7 +143,7 @@ class AccountTest {
      * <p>First develop the tests, then develop the methods.</p>
      */
     @Test
-    @DisplayName("Testing the current account credit operation")
+    @DisplayName("Test the current account credit operation")
     void testAccountCredit() {
         account.credit(new BigDecimal("1000"));
         final BigDecimal ACTUAL = this.account.getBalance();
@@ -157,7 +158,7 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("Testing the money transfer operation between 2 accounts")
+    @DisplayName("Test the money transfer operation between 2 accounts")
     void testTransferMoneyAccounts() {
         final Bank BANK = new Bank("TROBO");
         final Account SOURCE = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
@@ -177,7 +178,7 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("Testing the relationship between the bank and the accounts")
+    @DisplayName("Test the relationship between the bank and the accounts")
     void testRelationBankAccounts() {
         final Bank BANK = new Bank("TROBO");
         final Account ACCOUNT_1 = new Account("Cuenta de Ángel", ACCOUNT_BALANCE, BANK);
@@ -351,5 +352,22 @@ class AccountTest {
     })
     @DisplayName("Test disabled for some enviroment variables (Enviroment Variables)")
     void testDisableForEnvironmentVariables() {
+    }
+
+    @Test
+    @DisplayName("Test the current account balance. It is only executed if the system property \"ENV\" is set to \"dev\"")
+    void testAccountBalanceDev() {
+        final String ENV = System.getProperty("ENV");
+        final boolean IS_DEV = "dev".equals(ENV);
+
+        assumeTrue(IS_DEV, () -> String.format("The \"ENV\" property of System property isn't \"dev\", else is %s", ENV));
+
+        final BigDecimal ACTUAL = this.account.getBalance();
+
+        assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+        assumingThat(IS_DEV, () -> {
+            assertEquals(0, ACTUAL.compareTo(ACCOUNT_BALANCE),
+                    () -> String.format("Account balance isn't as expected: EXPECTED => %s // ACTUAL => %s", BigDecimal.ZERO, ACTUAL));
+        });
     }
 }
