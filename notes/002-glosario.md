@@ -152,7 +152,7 @@ Esta anotación nos permite deshabilitar tests según la versión de Java que se
 `org.junit.jupiter.api.condition.JRE`  
 
 ## `@EnabledIfSystemProperty` y `@EnabledIfSystemProperties`
-Esta anotación nos permite habilitar tests según una determinada propiedad del sistema. Ej.:  
+Esta anotación nos permite habilitar tests según una o unas determinadas propiedades del sistema. Ej.:  
 `@EnabledIfSystemProperty(named="java.version", matches = "16.0.2")`  
 ```
 @EnabledIfSystemProperties({
@@ -166,7 +166,7 @@ Esta anotación nos permite habilitar tests según una determinada propiedad del
 `org.junit.jupiter.api.condition.EnabledIfSystemProperties` 
 
 ## `@DisabledIfSystemProperty` y `@DisabledIfSystemProperties`
-Esta anotación nos permite deshabilitar tests según una determinada propiedad del sistema. Ej.:  
+Esta anotación nos permite deshabilitar tests según una o unas determinadas propiedades del sistema. Ej.:  
 `@EnabledIfSystemProperty(named="java.version", matches = "16.0.2")`
 ```
 @DisabledIfSystemProperties({
@@ -179,3 +179,34 @@ Esta anotación nos permite deshabilitar tests según una determinada propiedad 
 **Packaje:**  
 `org.junit.jupiter.api.condition.DisabledIfSystemProperty`  
 `org.junit.jupiter.api.condition.DisabledIfSystemProperties`  
+
+## `@EnabledIfEnvironmentVariable` y `@EnabledIfEnvironmentVariables`
+Esta anotación nos permite habilitar tests según una o unas determinadas variables de sistema. Ej.:  
+`@EnabledIfSystemProperty(named="java.version", matches = "16.0.2")`
+```
+@EnabledIfEnvironmentVariables({
+    @EnabledIfEnvironmentVariable(named="java.version", matches = "16.*"),
+    @EnabledIfEnvironmentVariable(named="java.vm.vendor", matches = "Oracle Corporation"),
+    @EnabledIfEnvironmentVariable(named="sun.arch.data.model", matches = "64")
+})
+```
+
+**Packaje:**  
+`org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable`  
+`org.junit.jupiter.api.condition.EnabledIfEnvironmentVariables`
+  
+
+## `@DisabledIfEnvironmentVariable` y `@DisabledIfEnvironmentVariables`
+Esta anotación nos permite deshabilitar tests según una o unas determinadas variables de sistema. Ej.:  
+`@DisabledIfEnvironmentVariable(named="java.version", matches = "16.0.2")`  
+```
+@DisabledIfEnvironmentVariables({
+    @DisabledIfEnvironmentVariable(named="java.version", matches = "16.*"),
+    @DisabledIfEnvironmentVariable(named="java.vm.vendor", matches = "Oracle Corporation"),
+    @DisabledIfEnvironmentVariable(named="sun.arch.data.model", matches = "64")
+})
+```
+**Packaje:**  
+`org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable`  
+`org.junit.jupiter.api.condition.DisabledIfEnvironmentVariables` 
+
