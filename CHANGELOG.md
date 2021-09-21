@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+---
+
+## `v1.0.0` _21/09/2021_
+
 ### ADDED  
 - **`#02` - JUnit5 // `#030` - Maven surefire plugin**
   - _The MAVEN plugin `Surefire` has been added to run the tests through MAVEN commands_.  
@@ -135,4 +139,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - _The project has been created._  
   - _`Junit5` and `Lombock` dependencies has been added to the pom file._
   - _The POJO `Account` has been created._
-  
