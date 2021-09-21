@@ -273,7 +273,14 @@ Para poder utilizar esta anotación tendremos que añadir la siguiente dependenc
 <groupId>org.junit.jupiter</groupId>
 <artifactId>junit-jupiter-params</artifactId>
 ```
-Esta anotación permite marcar una test para que ejecute un test pasandole 1 o varios argumentos. Se le puede cambiar el nombre de los tests resultantes, y también se pueden obtener para establecer en dicho nombre los siguientes atributos:
+Esta anotación permite marcar una test para que ejecute un test pasándole 1 o varios argumentos. Estos argumentos se pueden establecer de diferentes formas con las siguientes anotaciones:  
+ - `@ValueSource`
+ - `@CsvSource`
+ - `@CsvFileSource`
+ - `@MethodSource`  
+
+
+Se le puede cambiar el nombre de los tests resultantes, y también se pueden obtener para establecer en dicho nombre los siguientes atributos:
 - `{displayName}` => String que contiene la anotación `@DisplayName`
 - `{index}` => El número del argumento actual.
 - `{argumentsWithNames}` => El valor del argumento actual.
@@ -283,6 +290,37 @@ Ej.:
 `@ParameterizedTest`  
 `@ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")`
 
+```java
+@ParameterizedTest
+@ValueSource(strings = {"100", "200", "300", "500", "800", "1300", "2100", "3400", "4500"})
+void test(final String quantity) {
+```
+
+```java
+@ParameterizedTest
+@CsvSource({"1,100", "2,200", "3,300", "4,500", "5,800", "6,1300", "7,2100", "8,3400", "9,4500"})
+void test(final String index, final String value) {
+```
+
+```java
+@ParameterizedTest
+@CsvFileSource(resources="/data.csv")
+void test(final String quantity){
+```
+
+```java
+private static List<String> getQuantityList(){
+    return Arrays.asList("100", "200", "300", "500", "800", "1300", "2100", "3400", "4500");
+}
+        
+@ParameterizedTest
+@MethodSource("getQuantityList")
+void test(final String quantity){
+```
+
 **Packaje:**  
-`import org.junit.jupiter.params.ParameterizedTest`
-`import org.junit.jupiter.params.provider.ValueSource;`
+`import org.junit.jupiter.params.ParameterizedTest`  
+`import org.junit.jupiter.params.provider.ValueSource;`  
+`import org.junit.jupiter.params.provider.CsvSource;`  
+`import org.junit.jupiter.params.provider.CsvFileSource;`  
+`import org.junit.jupiter.params.provider.MethodSource;`  
