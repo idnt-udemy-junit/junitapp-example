@@ -6,7 +6,7 @@
 
     <groupId>org.idnt.udemy.junitapp.example</groupId>
     <artifactId>junit5_app</artifactId>
-    <version>v1.0.0</version>
+    <version>v1.1.0</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
