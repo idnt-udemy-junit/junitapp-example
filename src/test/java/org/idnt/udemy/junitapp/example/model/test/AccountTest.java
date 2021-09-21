@@ -22,6 +22,7 @@ class AccountTest {
     private static final String ACCOUNT_NAME =  "Personal Account";
     private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
 
+    @Tag("repeatedTest")
 //    @RepeatedTest(12)
     @RepeatedTest(value=12, name="{displayName} => Test [{currentRepetition}] // Total [{totalRepetitions}]")
     @DisplayName("Repeated Test")
@@ -37,6 +38,7 @@ class AccountTest {
                 () -> String.format("The random number must be between 0 and 10: NUMBER => %s", ACTUAL));
     }
 
+    @Tag("accountBasicTest")
     @Nested
     @DisplayName("Testing the basic attributes and methods of \"Account\" class")
     class AccountPOJOTest{
@@ -104,6 +106,7 @@ class AccountTest {
         }
     }
 
+    @Tag("accountActionsTest")
     @Nested
     @DisplayName("Testing the actions of \"Account\" class")
     class AccountActionsTest{
@@ -172,6 +175,7 @@ class AccountTest {
         }
     }
 
+    @Tag("BankTest")
     @Nested
     @DisplayName("Testing the \"Bank\" class")
     class BankTest{
@@ -235,6 +239,7 @@ class AccountTest {
         }
     }
 
+    @Tag("OSTest")
     @Nested
     @DisplayName("Testing depending on the operating system")
     class OperativeSystemTest{
@@ -260,6 +265,7 @@ class AccountTest {
         }
     }
 
+    @Tag("JavaVersionTest")
     @Nested
     @DisplayName("Testing depending on the Java version")
     class JavaVersionTest{
@@ -299,6 +305,7 @@ class AccountTest {
         }
     }
 
+    @Tag("systemPropertiesTest")
     @Nested
     @DisplayName("Testing depending on the System Properties")
     class SystemPropertiesTest{
@@ -348,6 +355,7 @@ class AccountTest {
         }
     }
 
+    @Tag("enviromentVariablesTest")
     @Nested
     @DisplayName("Testing depending on the environment variables")
     class EnviromentVariablesTest{
@@ -389,6 +397,7 @@ class AccountTest {
         }
     }
 
+    @Tag("assumptionsTest")
     @Nested
     @DisplayName("Tests with Assumptions")
     class AssumptionsTest{
@@ -418,6 +427,7 @@ class AccountTest {
         }
     }
 
+    @Tag("parameterizedTest")
     @Nested
     @DisplayName("Testing the parameterized tests")
     class ParameterizedTests{
@@ -443,6 +453,7 @@ class AccountTest {
                             ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
         }
 
+        @Tag("csvTest")
         @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
         @CsvSource({"1,100", "2,200", "3,300", "4,500", "5,800", "6,1300", "7,2100", "8,3400", "9,4500"})
         @DisplayName("Test the current account debit operation (CSV source)")
@@ -458,6 +469,7 @@ class AccountTest {
                             ACCOUNT_BALANCE, value, EXPECTED, ACTUAL));
         }
 
+        @Tag("csvTest")
         @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
         @CsvSource({"5000,100,4900", "2000,200,1800", "1000,300,700", "500,500,0", "1200,800,400", "1500,1300,200", "2500,2100,400", "3500,3400,100", "10000,4500,5500"})
         @DisplayName("Test the current account debit operation (CSV source more parameters)")
@@ -473,6 +485,7 @@ class AccountTest {
                             balance, quantity, expected, ACTUAL));
         }
 
+        @Tag("csvTest")
         @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
         @CsvFileSource(resources="/data.csv")
         @DisplayName("Test the current account debit operation (CSV File source)")
@@ -488,6 +501,7 @@ class AccountTest {
                             ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
         }
 
+        @Tag("csvTest")
         @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
         @CsvFileSource(resources="/data-full.csv")
         @DisplayName("Test the current account debit operation (CSV File source more parameters)")
