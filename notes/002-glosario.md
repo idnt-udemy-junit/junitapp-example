@@ -365,3 +365,25 @@ Comprueba si una ejecución sobrepasa un determinado tiempo. Ej.:
 **Packaje:**  
 `org.junit.jupiter.api.Assertions.assertTimeout`  
 `java.util.concurrent.TimeUnit`  
+
+## Surefire Maven Plugin
+Es un plugin de maven que nos permite ejecutar los test a través de los comandos de MAVEN.  
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.0.0-M5</version>
+</plugin>
+```  
+  
+Para que sólo ejecute los tests con unas determinadas etiquetas hay que añadir la siguiente configuración:
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.0.0-M5</version>
+    <configuration>
+        <groups>tagName1,tagName1,tagName1</groups>
+    </configuration>
+</plugin>
+```
