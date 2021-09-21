@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#027` - Tagging tests con anotación @Tag**
+  - _Tags have been set to various tests to test the `@Tag` annotation._ 
+  - _The `002-glosario` file has been updated._  
+
+
 - **`#02` - JUnit5 // `#026` - Pruebas parametrizadas con @ParameterizedTest parte 3**
   - _More test has been added to the `AccountTest` class to test the `@ParameterizedTest` annotation._  
   - _The `002-glosario` file has been updated._  

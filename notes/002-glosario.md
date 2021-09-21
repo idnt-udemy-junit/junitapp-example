@@ -330,3 +330,9 @@ void test(final String quantity){
 `import org.junit.jupiter.params.provider.CsvSource;`  
 `import org.junit.jupiter.params.provider.CsvFileSource;`  
 `import org.junit.jupiter.params.provider.MethodSource;`  
+
+## `@Tag`
+Esta anotación permite marcar una test con una etiqueta, esto nos permitirá ejecutar los tests por etiquetas (por grupos).  
+
+**Packaje:**  
+`org.junit.jupiter.api.Tag`
