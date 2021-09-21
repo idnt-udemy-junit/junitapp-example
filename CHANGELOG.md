@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#028` - Inyección de Dependencia & componentes testInfo y TestReporter**
+  - _Test information has been added at the beginning of each test in the JUnit LOG through the `TestInfo` and `TestReporter` classes._
+  - _The `002-glosario` file has been updated._
+
+
 - **`#02` - JUnit5 // `#027` - Tagging tests con anotación @Tag**
   - _Tags have been set to various tests to test the `@Tag` annotation._ 
   - _The `002-glosario` file has been updated._  

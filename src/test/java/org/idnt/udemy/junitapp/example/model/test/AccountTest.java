@@ -21,6 +21,20 @@ import static org.junit.jupiter.api.Assumptions.*;
 class AccountTest {
     private static final String ACCOUNT_NAME =  "Personal Account";
     private static final BigDecimal ACCOUNT_BALANCE =  new BigDecimal("5000.00");
+    private TestInfo testInfo;
+    private TestReporter testReporter;
+
+    @BeforeEach
+    void beforeTest(final TestInfo testInfo, final TestReporter testReporter) {
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
+
+        this.testReporter.publishEntry("Ejecutando Test");
+        this.testReporter.publishEntry(String.format("\tDisplayName: %s", this.testInfo.getDisplayName()));
+        this.testReporter.publishEntry(String.format("\tClass: %s", this.testInfo.getTestClass().get().getSimpleName()));
+        this.testReporter.publishEntry(String.format("\tMethod: %s", this.testInfo.getTestMethod().get().getName()));
+        this.testReporter.publishEntry(String.format("\tTags: %s", this.testInfo.getTags().toString()));
+    }
 
     @Tag("repeatedTest")
 //    @RepeatedTest(12)
@@ -28,7 +42,7 @@ class AccountTest {
     @DisplayName("Repeated Test")
     void testRepeated(RepetitionInfo info) {
         if( info.getCurrentRepetition() == 5){
-            System.out.println(String.format("This is repetition %s", info.getCurrentRepetition()));
+            this.testReporter.publishEntry(String.format("This is repetition %s", info.getCurrentRepetition()));
         }
 
         final int ACTUAL = new Random().nextInt(11);
@@ -46,13 +60,13 @@ class AccountTest {
 
         @BeforeEach
         void beforeTest(){
-            System.out.println("RESTORE ACCOUNT");
+            testReporter.publishEntry("RESTORE ACCOUNT");
             this.account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         }
 
         @Test
         @DisplayName("Test the current account name")
-        void testAccountName() {
+        void testAccountName(){
             final String EXPECTED = ACCOUNT_NAME;
             final String ACTUAL = this.account.getName();
 
@@ -114,7 +128,7 @@ class AccountTest {
 
         @BeforeEach
         void beforeTest(){
-            System.out.println("RESTORE ACCOUNT");
+            testReporter.publishEntry("RESTORE ACCOUNT");
             this.account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         }
 
@@ -313,7 +327,7 @@ class AccountTest {
         @DisplayName("Test to print the System Properties")
         void printSystemProperties() {
             Properties properties = System.getProperties();
-            properties.forEach((key, value) -> System.out.println(String.format("%s => %s", key, value)));
+            properties.forEach((key, value) -> testReporter.publishEntry(String.format("%s => %s", key, value)));
         }
 
         @Test
@@ -363,7 +377,7 @@ class AccountTest {
         @DisplayName("Test to print the enviroment variables")
         void printEnviromentVariables() {
             Map<String, String> enviromentVariables = System.getenv();
-            enviromentVariables.forEach((key, value) -> System.out.println(String.format("%s => %s", key, value)));
+            enviromentVariables.forEach((key, value) -> testReporter.publishEntry(String.format("%s => %s", key, value)));
         }
 
         @Test
@@ -405,7 +419,7 @@ class AccountTest {
 
         @BeforeEach
         void beforeTest(){
-            System.out.println("RESTORE ACCOUNT");
+            testReporter.publishEntry("RESTORE ACCOUNT");
             this.account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         }
 
@@ -435,7 +449,7 @@ class AccountTest {
 
         @BeforeEach
         void beforeTest(){
-            System.out.println("RESTORE ACCOUNT");
+            testReporter.publishEntry("RESTORE ACCOUNT");
             this.account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
         }
 
@@ -458,7 +472,7 @@ class AccountTest {
         @CsvSource({"1,100", "2,200", "3,300", "4,500", "5,800", "6,1300", "7,2100", "8,3400", "9,4500"})
         @DisplayName("Test the current account debit operation (CSV source)")
         void testAccountDebitFromCsvSource(final String index, final String value) {
-            System.out.println(String.format("INDEX => %s // VALUE => %s", index, value));
+            testReporter.publishEntry(String.format("INDEX => %s // VALUE => %s", index, value));
             final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(value));
             this.account.debit(new BigDecimal(value));
             final BigDecimal ACTUAL = this.account.getBalance();
@@ -474,7 +488,7 @@ class AccountTest {
         @CsvSource({"5000,100,4900", "2000,200,1800", "1000,300,700", "500,500,0", "1200,800,400", "1500,1300,200", "2500,2100,400", "3500,3400,100", "10000,4500,5500"})
         @DisplayName("Test the current account debit operation (CSV source more parameters)")
         void testAccountDebitFromCsvSourceMoreParams(final String balance, final String quantity, final String expected) {
-            System.out.println(String.format("BALANCE => %s // QUANTITY => %s // EXPECTED => %s", balance, quantity, expected));
+            testReporter.publishEntry(String.format("BALANCE => %s // QUANTITY => %s // EXPECTED => %s", balance, quantity, expected));
             this.account.setBalance(new BigDecimal(balance));
             this.account.debit(new BigDecimal(quantity));
             final BigDecimal ACTUAL = this.account.getBalance();
@@ -490,7 +504,7 @@ class AccountTest {
         @CsvFileSource(resources="/data.csv")
         @DisplayName("Test the current account debit operation (CSV File source)")
         void testAccountDebitFromFileSource(final String quantity) {
-            System.out.println(String.format("QUANTITY => %s", quantity));
+            testReporter.publishEntry(String.format("QUANTITY => %s", quantity));
             final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(quantity));
             this.account.debit(new BigDecimal(quantity));
             final BigDecimal ACTUAL = this.account.getBalance();
@@ -506,7 +520,7 @@ class AccountTest {
         @CsvFileSource(resources="/data-full.csv")
         @DisplayName("Test the current account debit operation (CSV File source more parameters)")
         void testAccountDebitFromFileSourceMoreParams(final String balance, final String quantity, final String expected) {
-            System.out.println(String.format("BALANCE => %s // QUANTITY => %s // EXPECTED => %s", balance, quantity, expected));
+            testReporter.publishEntry(String.format("BALANCE => %s // QUANTITY => %s // EXPECTED => %s", balance, quantity, expected));
             this.account.setBalance(new BigDecimal(balance));
             this.account.debit(new BigDecimal(quantity));
             final BigDecimal ACTUAL = this.account.getBalance();
@@ -525,7 +539,7 @@ class AccountTest {
         @MethodSource("getQuantityList")
         @DisplayName("Test the current account debit operation (Method source)")
         void testAccountDebitFromMethodSource(final String quantity) {
-            System.out.println(String.format("QUANTITY => %s", quantity));
+            testReporter.publishEntry(String.format("QUANTITY => %s", quantity));
             final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(quantity));
             this.account.debit(new BigDecimal(quantity));
             final BigDecimal ACTUAL = this.account.getBalance();
