@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#025` - Pruebas parametrizadas con @ParameterizedTest parte 2**
+  - _Several tests have been added to the `AccountTest` class to test different ways of setting the test parameters for a `@ParameterizedTest`._
+  - _The `002-glosario` file has been updated._  
+
+
 - **`#02` - JUnit5 // `#024` - Pruebas parametrizadas con @ParameterizedTest**
   - _The dependendecy to use the `@ParameterizedTest` annotation has been added._  
   - _A test has been added to the `AccountTest` class to test the `@ParameterizedTest` annotation._
