@@ -30,7 +30,7 @@ class AccountTest {
             System.out.println(String.format("This is repetition %s", info.getCurrentRepetition()));
         }
 
-        final int ACTUAL = new Random().nextInt(13);
+        final int ACTUAL = new Random().nextInt(11);
 
         assertNotNull(ACTUAL, () -> "The result cant' be void");
         assertTrue(ACTUAL >= 0 && ACTUAL <= 10,
@@ -459,6 +459,21 @@ class AccountTest {
         }
 
         @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
+        @CsvSource({"5000,100,4900", "2000,200,1800", "1000,300,700", "500,500,0", "1200,800,400", "1500,1300,200", "2500,2100,400", "3500,3400,100", "10000,4500,5500"})
+        @DisplayName("Test the current account debit operation (CSV source more parameters)")
+        void testAccountDebitFromCsvSourceMoreParams(final String balance, final String quantity, final String expected) {
+            System.out.println(String.format("BALANCE => %s // QUANTITY => %s // EXPECTED => %s", balance, quantity, expected));
+            this.account.setBalance(new BigDecimal(balance));
+            this.account.debit(new BigDecimal(quantity));
+            final BigDecimal ACTUAL = this.account.getBalance();
+
+            assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+            assertEquals(0, ACTUAL.compareTo(new BigDecimal(expected)),
+                    () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
+                            balance, quantity, expected, ACTUAL));
+        }
+
+        @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
         @CsvFileSource(resources="/data.csv")
         @DisplayName("Test the current account debit operation (CSV File source)")
         void testAccountDebitFromFileSource(final String quantity) {
@@ -471,6 +486,21 @@ class AccountTest {
             assertEquals(0, ACTUAL.compareTo(EXPECTED),
                     () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
                             ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
+        }
+
+        @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
+        @CsvFileSource(resources="/data-full.csv")
+        @DisplayName("Test the current account debit operation (CSV File source more parameters)")
+        void testAccountDebitFromFileSourceMoreParams(final String balance, final String quantity, final String expected) {
+            System.out.println(String.format("BALANCE => %s // QUANTITY => %s // EXPECTED => %s", balance, quantity, expected));
+            this.account.setBalance(new BigDecimal(balance));
+            this.account.debit(new BigDecimal(quantity));
+            final BigDecimal ACTUAL = this.account.getBalance();
+
+            assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+            assertEquals(0, ACTUAL.compareTo(new BigDecimal(expected)),
+                    () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
+                            balance, quantity, expected, ACTUAL));
         }
 
         private static List<String> getQuantityList(){
