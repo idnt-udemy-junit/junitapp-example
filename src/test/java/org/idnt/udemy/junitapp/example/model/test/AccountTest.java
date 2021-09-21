@@ -6,12 +6,13 @@ import org.idnt.udemy.junitapp.example.model.Bank;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
@@ -430,8 +431,57 @@ class AccountTest {
 
         @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
         @ValueSource(strings = {"100", "200", "300", "500", "800", "1300", "2100", "3400", "4500"})
-        @DisplayName("Test the current account debit operation")
-        void testAccountDebit(final String quantity) {
+        @DisplayName("Test the current account debit operation (Value source)")
+        void testAccountDebitValueSource(final String quantity) {
+            final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(quantity));
+            this.account.debit(new BigDecimal(quantity));
+            final BigDecimal ACTUAL = this.account.getBalance();
+
+            assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+            assertEquals(0, ACTUAL.compareTo(EXPECTED),
+                    () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
+                            ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
+        }
+
+        @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
+        @CsvSource({"1,100", "2,200", "3,300", "4,500", "5,800", "6,1300", "7,2100", "8,3400", "9,4500"})
+        @DisplayName("Test the current account debit operation (CSV source)")
+        void testAccountDebitFromCsvSource(final String index, final String value) {
+            System.out.println(String.format("INDEX => %s // VALUE => %s", index, value));
+            final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(value));
+            this.account.debit(new BigDecimal(value));
+            final BigDecimal ACTUAL = this.account.getBalance();
+
+            assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+            assertEquals(0, ACTUAL.compareTo(EXPECTED),
+                    () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
+                            ACCOUNT_BALANCE, value, EXPECTED, ACTUAL));
+        }
+
+        @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
+        @CsvFileSource(resources="/data.csv")
+        @DisplayName("Test the current account debit operation (CSV File source)")
+        void testAccountDebitFromFileSource(final String quantity) {
+            System.out.println(String.format("QUANTITY => %s", quantity));
+            final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(quantity));
+            this.account.debit(new BigDecimal(quantity));
+            final BigDecimal ACTUAL = this.account.getBalance();
+
+            assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+            assertEquals(0, ACTUAL.compareTo(EXPECTED),
+                    () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
+                            ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
+        }
+
+        private static List<String> getQuantityList(){
+            return Arrays.asList("100", "200", "300", "500", "800", "1300", "2100", "3400", "4500");
+        }
+
+        @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
+        @MethodSource("getQuantityList")
+        @DisplayName("Test the current account debit operation (Method source)")
+        void testAccountDebitFromMethodSource(final String quantity) {
+            System.out.println(String.format("QUANTITY => %s", quantity));
             final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(quantity));
             this.account.debit(new BigDecimal(quantity));
             final BigDecimal ACTUAL = this.account.getBalance();
