@@ -336,3 +336,15 @@ Esta anotación permite marcar una test con una etiqueta, esto nos permitirá ej
 
 **Packaje:**  
 `org.junit.jupiter.api.Tag`
+
+## `TestInfo`
+Esta clase la podemos obtener a través de la inyección de dependencias de JUnit en nuestros tests. Esta clase trae la información del test (displayName, tags, method, etc).  
+
+**Packaje:**  
+`org.junit.jupiter.api.TestInfo`
+
+## `TestReporter`
+Esta clase la podemos obtener a través de la inyección de dependencias de JUnit en nuestros tests. Esta clase nos permite crear entradas en el LOG de JUnit.  
+
+**Packaje:**  
+`org.junit.jupiter.api.TestReporter`
