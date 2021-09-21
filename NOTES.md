@@ -1,7 +1,7 @@
 # NOTES
 
 ## ¿Qué es JUnit5?
-JUnit es un framework para escribit pruebas unitarias de nuestro código y ejecutarlas en la JVM. Utiliza programación funcionar y lambda, e incluye varios estilos diferentes de pruebas, configuraciones, anotaciones, ciclo de vida, etc.
+JUnit es un framework para escribir pruebas unitarias de nuestro código y ejecutarlas en la JVM. Utiliza programación funcionar y lambda, e incluye varios estilos diferentes de pruebas, configuraciones, anotaciones, ciclo de vida, etc.
 
 ---
 
@@ -14,6 +14,11 @@ JUnit es un framework para escribit pruebas unitarias de nuestro código y ejecu
   
 > **JUnit Vintage**  
 > Es el componente encargado de los tests de Junit 3 y 4, por si alguien los echa de menos.
+
+---
+
+## Test-Driven Development
+TDD o Test-Driven Development (desarrollo dirigido por tests) es una práctica de programación que consiste en escribir primero las pruebas (generalmente unitarias), después escribir el código fuente que pase la prueba satisfactoriamente y, por último, refactorizar el código escrito.  
 
 ---
 
@@ -176,7 +181,7 @@ Esta anotación nos permite deshabilitar tests según la versión de Java que se
 ### + `@EnabledIfSystemProperty` y `@EnabledIfSystemProperties`
 Esta anotación nos permite habilitar tests según una o unas determinadas propiedades del sistema. Ej.:  
 `@EnabledIfSystemProperty(named="java.version", matches = "16.0.2")`
-```
+```java
 @EnabledIfSystemProperties({
     @EnabledIfSystemProperty(named="java.version", matches = "16.*"),
     @EnabledIfSystemProperty(named="java.vm.vendor", matches = "Oracle Corporation"),
@@ -190,7 +195,7 @@ Esta anotación nos permite habilitar tests según una o unas determinadas propi
 ### + `@DisabledIfSystemProperty` y `@DisabledIfSystemProperties`
 Esta anotación nos permite deshabilitar tests según una o unas determinadas propiedades del sistema. Ej.:  
 `@EnabledIfSystemProperty(named="java.version", matches = "16.0.2")`
-```
+```java
 @DisabledIfSystemProperties({
     @DisabledIfSystemProperty(named="java.version", matches = "16.*"),
     @DisabledIfSystemProperty(named="java.vm.vendor", matches = "Oracle Corporation"),
@@ -205,7 +210,7 @@ Esta anotación nos permite deshabilitar tests según una o unas determinadas pr
 ### + `@EnabledIfEnvironmentVariable` y `@EnabledIfEnvironmentVariables`
 Esta anotación nos permite habilitar tests según una o unas determinadas variables de sistema. Ej.:  
 `@EnabledIfSystemProperty(named="java.version", matches = "16.0.2")`
-```
+```java
 @EnabledIfEnvironmentVariables({
     @EnabledIfEnvironmentVariable(named="java.version", matches = "16.*"),
     @EnabledIfEnvironmentVariable(named="java.vm.vendor", matches = "Oracle Corporation"),
@@ -221,7 +226,7 @@ Esta anotación nos permite habilitar tests según una o unas determinadas varia
 ### + `@DisabledIfEnvironmentVariable` y `@DisabledIfEnvironmentVariables`
 Esta anotación nos permite deshabilitar tests según una o unas determinadas variables de sistema. Ej.:  
 `@DisabledIfEnvironmentVariable(named="java.version", matches = "16.0.2")`
-```
+```java
 @DisabledIfEnvironmentVariables({
     @DisabledIfEnvironmentVariable(named="java.version", matches = "16.*"),
     @DisabledIfEnvironmentVariable(named="java.vm.vendor", matches = "Oracle Corporation"),
@@ -275,7 +280,7 @@ También se puede obtener por inyección de dependencias a través de la firma d
 
 `@RepeatedTest(12)`  
 `@RepeatedTest(value=12, name="{displayName} => Test [{currentRepetition}] // Total [{totalRepetitions}]")`
-```
+```java
 void testRepeated(RepetitionInfo info) {
     if( info.getCurrentRepetition() == 5){
         System.out.println("Repetition: " + info.getCurrentRepetition());
