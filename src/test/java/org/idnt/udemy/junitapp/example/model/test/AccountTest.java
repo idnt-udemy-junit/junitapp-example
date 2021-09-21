@@ -5,6 +5,8 @@ import org.idnt.udemy.junitapp.example.model.Account;
 import org.idnt.udemy.junitapp.example.model.Bank;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -412,6 +414,32 @@ class AccountTest {
                 assertEquals(0, ACTUAL.compareTo(ACCOUNT_BALANCE),
                         () -> String.format("Account balance isn't as expected: EXPECTED => %s // ACTUAL => %s", BigDecimal.ZERO, ACTUAL));
             });
+        }
+    }
+
+    @Nested
+    @DisplayName("Testing the parameterized tests")
+    class ParameterizedTests{
+        private Account account;
+
+        @BeforeEach
+        void beforeTest(){
+            System.out.println("RESTORE ACCOUNT");
+            this.account = new Account(ACCOUNT_NAME, ACCOUNT_BALANCE, null);
+        }
+
+        @ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")
+        @ValueSource(strings = {"100", "200", "300", "500", "800", "1300", "2100", "3400", "4500"})
+        @DisplayName("Test the current account debit operation")
+        void testAccountDebit(final String quantity) {
+            final BigDecimal EXPECTED = this.account.getBalance().subtract(new BigDecimal(quantity));
+            this.account.debit(new BigDecimal(quantity));
+            final BigDecimal ACTUAL = this.account.getBalance();
+
+            assertNotNull(ACTUAL, () -> "The account balance cant' be void");
+            assertEquals(0, ACTUAL.compareTo(EXPECTED),
+                    () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
+                            ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
         }
     }
 }
