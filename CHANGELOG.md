@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ### ADDED  
+- **`#02` - JUnit5 // `#030` - Maven surefire plugin**
+  - _The MAVEN plugin `Surefire` has been added to run the tests through MAVEN commands_.  
+  - _The `002-glosario` file has been updated._  
+  
+
 - **`#02` - JUnit5 // `#029` - Timeout en JUnit 5**
   - _Some tests have been added to the `AccountTest` class to test the `@Timeout` annotation and the `assertTimeout` method._  
   - _The `002-glosario` file has been updated._
