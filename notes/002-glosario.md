@@ -266,3 +266,23 @@ void testRepeated(RepetitionInfo info) {
 
 **Packaje:**  
 `org.junit.jupiter.api.RepeatedTest`
+
+## `@ParameterizedTest`
+Para poder utilizar esta anotación tendremos que añadir la siguiente dependencia:  
+```
+<groupId>org.junit.jupiter</groupId>
+<artifactId>junit-jupiter-params</artifactId>
+```
+Esta anotación permite marcar una test para que ejecute un test pasandole 1 o varios argumentos. Se le puede cambiar el nombre de los tests resultantes, y también se pueden obtener para establecer en dicho nombre los siguientes atributos:
+- `{displayName}` => String que contiene la anotación `@DisplayName`
+- `{index}` => El número del argumento actual.
+- `{argumentsWithNames}` => El valor del argumento actual.
+
+Ej.:
+
+`@ParameterizedTest`  
+`@ParameterizedTest(name="{displayName} => Test [{index}][{argumentsWithNames}]")`
+
+**Packaje:**  
+`import org.junit.jupiter.params.ParameterizedTest`
+`import org.junit.jupiter.params.provider.ValueSource;`
