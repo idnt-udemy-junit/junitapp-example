@@ -12,7 +12,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
@@ -549,5 +551,31 @@ class AccountTest {
                     () -> String.format("The account balance (%s) must be %s less: EXPECTED => %s // ACTUAL => %s",
                             ACCOUNT_BALANCE, quantity, EXPECTED, ACTUAL));
         }
+    }
+
+    @Tag("timeoutTest")
+    @Nested
+    @DisplayName("Testing the timeout tests")
+    class TimeoutTests{
+
+        @Test
+        @Timeout(1)
+        void testTimeout1() throws InterruptedException {
+            TimeUnit.MILLISECONDS.sleep(1000);
+        }
+
+        @Test
+        @Timeout(value = 1, unit = TimeUnit.SECONDS )
+        void testTimeout2() throws InterruptedException {
+            TimeUnit.MILLISECONDS.sleep(1000);
+        }
+
+        @Test
+        void testTimeout3(){
+            assertTimeout(Duration.ofSeconds(1), () -> {
+                TimeUnit.MILLISECONDS.sleep(1000);
+            });
+        }
+
     }
 }
