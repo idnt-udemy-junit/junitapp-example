@@ -348,3 +348,20 @@ Esta clase la podemos obtener a través de la inyección de dependencias de JUni
 
 **Packaje:**  
 `org.junit.jupiter.api.TestReporter`
+
+## `@Timeout`
+Esta anotación nos permite marcar un test para hacer que un test falle si su ejecución sobrepasa un determinado tiempo. Ej.:  
+`@Timeout(5)`  
+`@Timeout(value = 5, unit = TimeUnit.SECONDS )`  
+
+**Packaje:**  
+`org.junit.jupiter.api.Timeout`  
+`java.util.concurrent.TimeUnit`  
+
+## `Assertions.assertTimeout()`
+Comprueba si una ejecución sobrepasa un determinado tiempo. Ej.:  
+`assertTimeout(Duration.ofSeconds(5), () -> TimeUnit.MILLISECONDS.sleep(5000) );`  
+
+**Packaje:**  
+`org.junit.jupiter.api.Assertions.assertTimeout`  
+`java.util.concurrent.TimeUnit`  
